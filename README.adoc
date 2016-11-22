@@ -1,0 +1,10 @@
+= OLEs: Omni Layer Enhancement Proposals
+
+== Introduction
+
+This repository will contain Omni Layer Enhancement Proposals (OLEs) which will serve a similar function on the Omni Layer as BIPs perform for Bitcoin.
+
+== Planned OLEs
+
+OLE-001:: OLE Purpose and Guidelines (based on BIP-001)
+OLE-002:: Omni Layer Safe Addresses
