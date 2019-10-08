@@ -1,10 +1,20 @@
-= OLEs: Omni Layer Enhancement Proposals
+= Omni Layer Documentation Project
 
 == Introduction
 
-This repository will contain Omni Layer Enhancement Proposals (OLEs) which will serve a similar function on the Omni Layer as BIPs perform for Bitcoin.
+This repository is the main repository for the Omni Layer Documentation Project. Most new documents should be created here. Links will be provided to existing documents in other repositories, and on a case-by-case basis, we can consider moving documents to this repository.
 
-== Planned OLEs
+== Documentation Subprojects
 
-OLE-001:: OLE Purpose and Guidelines (based on BIP-001)
-OLE-002:: Omni Layer Safe Addresses
+* https://www.omnilayer.org[OmniLayer.org] website (source in https://github.com/OmniLayer/omnilayer.github.io[OmniLayer/omnilayer.github.io] repository)
+* https://github.com/OmniLayer/spec/blob/master/README.md#omni-protocol-specification-formerly-mastercoin[Omni Protocol Specification] (https://github.com/OmniLayer/spec[OmniLayer/spec] repository).
+* **Omni Core** documentation https://github.com/OmniLayer/omnicore[OmniLayer/omnicore] repository, `develop` branch)
+** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/release-notes.md#omni-core-v060[Omni Core v0.6.0 Release Notes]
+** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/configuration.md#configuration[Omni Core Configuration]
+** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/rpc-api.md#json-rpc-api[Omni Core JSON-RPC API]
+* <<OLEs/README.adoc#,OLEs>>  (**O**mni **L**ayer **E**nhancement Proposal**s**)
+* Omni Layer Developer Documentation
+** <<developer/OmniDev_GettingStarted.adoc#,Getting Started with Omni Development>>
+** Omni Layer Developer's Guide (TBD)
+* https://github.com/LightningOnOmnilayer/Omni-BOLT-spec#omnibolt-in-progress-specifications[OmniBOLT In Progress Specifications]
+

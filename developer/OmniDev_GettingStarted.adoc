@@ -1,0 +1,6 @@
+= Getting Started with Omni Development
+
+== Welcome
+
+Welcome to the Omni Layer project. This document will provide information for how you can contribute to Omni by directly contributing to the Omni Layer project or by developing software or Omni tokens in the Omni ecosystem.
+
