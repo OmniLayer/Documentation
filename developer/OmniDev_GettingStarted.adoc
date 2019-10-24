@@ -4,3 +4,20 @@
 
 Welcome to the Omni Layer project. This document will provide information for how you can contribute to Omni by directly contributing to the Omni Layer project or by developing software or Omni tokens in the Omni ecosystem.
 
+
+== Contributing to Omni Documentation
+
+Contributions to documentation are always welcome.
+
+=== Working with Asciidoctor format
+
+Omni documentation is increasingly being created and edited in the http://asciidoctor.org[AsciiDoc] format. AsciiDoc is a powerful markdown format especially suited for software project documentation.
+
+The easiest way to make small changes is to edit the file directly on Github. Github supports AsciiDoctor directly so to edit this file, you can click the following link: https://github.com/OmniLayer/Documentation/edit/master/developer/OmniDev_GettingStarted.adoc[edit OmniDev_GettingStarted.adoc].
+
+If you want to check the file out with Git and edit locally you can use any text editor and preview in your web browser using one of the Asciidoctor Live Preview plugins:
+
+* https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia[Asciidoctor.js Live Preview for Google Chrome]
+* https://addons.mozilla.org/en-US/firefox/addon/asciidoctorjs-live-preview/[Asciidoctor.js Live Preview for Mozilla Firefox]
+
+There are many https://asciidoctor.org/docs/editing-asciidoc-with-live-preview/[other tools] and toolchains that support Asciidoctor, but the above are the easiest to get started with.
