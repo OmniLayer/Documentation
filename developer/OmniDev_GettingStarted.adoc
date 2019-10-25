@@ -13,6 +13,8 @@ Contributions to documentation are always welcome.
 
 Omni documentation is increasingly being created and edited in the http://asciidoctor.org[AsciiDoc] format. AsciiDoc is a powerful markdown format especially suited for software project documentation.
 
+If you're migrating from Github Markdown (`.md` format), https://asciidoctor.org/docs/asciidoc-vs-markdown/[AsciiDoc vs Markdown] is a very helpful document, especially the https://asciidoctor.org/docs/asciidoc-vs-markdown/#comparison-by-example[Comparison by example] section.
+
 The easiest way to make small changes is to edit the file directly on Github. Github supports AsciiDoctor directly so to edit this file, you can click the following link: https://github.com/OmniLayer/Documentation/edit/master/developer/OmniDev_GettingStarted.adoc[edit OmniDev_GettingStarted.adoc].
 
 If you want to check the file out with Git and edit locally you can use any text editor and preview in your web browser using one of the Asciidoctor Live Preview plugins:
