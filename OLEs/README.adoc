@@ -4,7 +4,16 @@
 
 This directory contains Omni Layer Enhancement Proposals (OLEs) which will serve a similar function on the Omni Layer as BIPs perform for Bitcoin.
 
+== OLE ranges
+
+001-099:: Process and informational OLEs
+100-199:: Consensus-effecting OLEs
+200-299:: Higher layer OLEs (e.g. Wallet, overall ecosystem)
+
 == Planned OLEs
 
 OLE-001:: OLE Purpose and Guidelines (based on BIP-001)
-OLE-002:: Omni Layer Safe Addresses
+OLE-100:: Class C addresses
+OLE-101:: Omni Non-fungible tokens (aka NFT, UIT)
+OLE-200:: Omni Layer Safe Addresses
+
