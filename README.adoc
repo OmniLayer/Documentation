@@ -9,7 +9,7 @@ This repository is the main repository for the Omni Layer Documentation Project.
 * https://www.omnilayer.org[OmniLayer.org] website (source in https://github.com/OmniLayer/omnilayer.github.io[OmniLayer/omnilayer.github.io] repository)
 * https://github.com/OmniLayer/spec/blob/master/README.md#omni-protocol-specification-formerly-mastercoin[Omni Protocol Specification] (https://github.com/OmniLayer/spec[OmniLayer/spec] repository).
 * **Omni Core** documentation https://github.com/OmniLayer/omnicore[OmniLayer/omnicore] repository, `develop` branch)
-** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/release-notes.md#omni-core-v060[Omni Core v0.6.0 Release Notes]
+** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/release-notes.md[Omni Core Release Notes]
 ** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/configuration.md#configuration[Omni Core Configuration]
 ** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/rpc-api.md#json-rpc-api[Omni Core JSON-RPC API]
 * <<OLEs/README.adoc#,OLEs>>  (**O**mni **L**ayer **E**nhancement Proposal**s**)
