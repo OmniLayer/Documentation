@@ -8,12 +8,31 @@ This directory contains Omni Layer Enhancement Proposals (OLEs) which will serve
 
 001-099:: Process and informational OLEs
 100-199:: Consensus-effecting OLEs
-200-299:: Higher layer OLEs (e.g. Wallet, overall ecosystem)
+200-299:: Network layer OLEs (RPC API, etc.)
+300-399:: Higher layer OLEs (e.g. Wallet, overall ecosystem)
 
-== Planned OLEs
+== Existing and Planned OLEs
+
+
+=== Process and Informational
 
 OLE-001:: OLE Purpose and Guidelines (based on BIP-001)
-OLE-100:: Class C addresses
+
+=== Consensus
+
+OLE-100:: Deferred Features from the Original Spec
 OLE-101:: Omni Non-fungible tokens (aka NFT, UIT)
-OLE-200:: Omni Layer Safe Addresses
+
+=== Network Layer
+
+* TBD
+
+=== Application Layer
+
+[options="header",frame="all"]
+|===
+| OLE     | Title
+| OLE-300 | link:ole-300.adoc[Omni Layer Safe Segwit Address Format]
+|===
+
 

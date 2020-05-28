@@ -1,0 +1,111 @@
+....
+  OLE: 300
+  Layer: Applications
+  Title: Omni Layer Safe Segregated Witness Address Format
+  Author: Sean Gilligan <sean@msgilligan.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-300.adoc
+  Status: Draft
+  Type: Informational
+  Created: 2020-05-27
+  License: BSD-2-Clause
+....
+
+== Introduction
+
+=== Abstract
+
+This document proposes using an OmniLayer-specific Bech32 format for sending
+and receiving OmniLayer properties. The implementation would be at the wallet and
+ RPC API layers, not at the protocol/transaction layer. All OmniLayer-compatible wallets *must* use
+this format for Omni segregated witness addresses.
+
+=== Copyright
+
+This OLE is licensed under the 2-clause BSD license.
+
+=== Motivation
+
+Since the launch of the Omni Layer, Omni has used Base58 Bitcoin addresses for sending and receiving Omni properties. Since the Omni Layer uses the Bitcoin network and Bitcoin private keys to sign transactions, this was the straightforward solution. Unfortunately, since all existing wallets that support Omni allow sending Omni properties to Bitcoin addresses, it is possible for users to send Omni tokens to Bitcoin wallets that do not support Omni transactions. When users send Omni properties to addresses in wallets that do not support Omni Layer transactions, it can be difficult or impossible to recover the transferred Omni properties.
+
+=== Examples
+
+All examples use public key
+`+0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798+`.
+The P2WSH examples use `+key OP_CHECKSIG+` as script. Note that the Bitcoin and Omni addresses in each category are equivalent and convertible.
+
+[options="header",frame="all"]
+|===
+| Network | Script      | Coin      | Address
+| Mainnet | P2WPKH      | *Omni*    | `o1qw508d6qejxtdg4y5r3zarvary0c5xw7ka0ylh5`
+| Mainnet | P2WPKH      | Bitcoin   | `bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4`
+| Mainnet | P2WSH       | *Omni*    | `o1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qknvqsp`
+| Mainnet | P2WSH       | Bitcoin   | `+bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3+`
+| Testnet | P2WPKH      | *Omni*    | `to1qw508d6qejxtdg4y5r3zarvary0c5xw7kjw58mu`
+| Testnet | P2WPKH      | Bitcoin   | `tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx`
+| Testnet | P2WSH       | *Omni*    | `to1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qz3y9y6`
+| Testnet | P2WSH       | Bitcoin   | `tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7`
+|===
+
+
+== Specification
+
+=== Human Readable Part
+
+The (to-be) registered Human Readable Part (prefix) of Omni Layer Bech32 addresses are defined in the following table. See BIP-0173 in <<References>> for details on Bech32.
+
+
+[options="header",frame="all"]
+|===
+| Coin | Mainnet | Testnet | Regtest
+| Omni | `o`     | `to`    | `ort`
+|===
+
+NOTE:: Once we have agreement on this, we will submit a Pull Request to SLIP-0173.
+
+=== Enforcement by Wallet Implementations
+
+All compliant wallet implementations will by default only send Omni Segwit transactions to Omni Layer Bech32 addresses.
+
+NOTE:: If necessary, wallet implementations may allow sending Omni transactions to regular Bitcoin Bech32 addresses after displaying a warning and receiving user confirmation.
+
+=== Conversion
+
+There is a reversible 1-to-1 conversion between Omni Layer Bech32 and regular Bitcoin. Wallet implementations may use these conversions internally by wallet implementations and other applications as needed to implement this specification.
+
+=== Omni Core RPC API Enforcement
+
+All Segwit addresses provided as parameters to Omni Core RPC API methods that operate on Omni Layer smart properties, must be Omni Layer Bech32 addresses, or the RPC will return an error code. The existing Bitcoin RPC methods will accept Bitcoin Bech32 addresses.
+
+NOTE:: We will need to review the Omni Core RPC API documentation parameter-by-parameter to verify that this approach will work correctly.
+
+=== Marker Addresses
+
+It is worth noting that Omni Layer transactions send Bitcoin to reference addresses. For Segwit Omni transactions it is these reference addresses that will be represented by Omni Layer Segwit addresses in address string data, QR codes, and even in calls to the Omni Core RPC API.
+
+
+=== Compatibility
+
+Only new software will be able to use these addresses, and only for
+receivers with Omni-compatible Segwit-enabled new software. In all other cases, existing Bitcoin P2SH or
+P2PKH addresses can be used.
+
+== References
+
+* Omni Layer Segwit Implementation [TBD]
+
+* https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki[BIP-0173
+: Base32 address format for native v0-16 witness outputs]
+
+* https://github.com/satoshilabs/slips/blob/master/slip-0173.md[SLIP-0173
+: Registered human-readable parts for BIP-0173]
+
+== Reference Implementations
+
+* Reference converter
+** https://github.com/OmniLayer/OmniJ/pull/170[OmniJ] (for Java/OpenJDK)
+
+
+== Appendices
+
+TODO: Add test vectors and/or links to Spock functional tests.
