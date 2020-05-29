@@ -40,7 +40,7 @@ The P2WSH examples use `+key OP_CHECKSIG+` as script. Note that the Bitcoin and 
 | Mainnet | P2WPKH      | *Omni*    | `o1qw508d6qejxtdg4y5r3zarvary0c5xw7ka0ylh5`
 | Mainnet | P2WPKH      | Bitcoin   | `bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4`
 | Mainnet | P2WSH       | *Omni*    | `o1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qknvqsp`
-| Mainnet | P2WSH       | Bitcoin   | `+bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3+`
+| Mainnet | P2WSH       | Bitcoin   | `bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3`
 | Testnet | P2WPKH      | *Omni*    | `to1qw508d6qejxtdg4y5r3zarvary0c5xw7kjw58mu`
 | Testnet | P2WPKH      | Bitcoin   | `tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx`
 | Testnet | P2WSH       | *Omni*    | `to1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qz3y9y6`
@@ -73,6 +73,13 @@ NOTE:: If necessary, wallet implementations may allow sending Omni transactions 
 
 There is a reversible 1-to-1 conversion between Omni Layer Bech32 and regular Bitcoin. Wallet implementations may use these conversions internally by wallet implementations and other applications as needed to implement this specification.
 
+=== Bech32 Improvements
+
+The Bech32 algorithm currently specified in BIP-0173 contains a minor flaw that causes it to fail to detect certain error conditions (see <<References>>.) By modifying a single constant in the algorithm the flaw can be fixed. This DRAFT version of OLE-0300 specifies that we should use the forthcoming improved BIP-0173 algorithm since there are currently no Omni Segwit Addresses in use. We may reconsider this decision before finalizing this OLE.
+
+The advantage of using the improved algorithm is an increased resistance to corrupted Omni addresses. The disadvantage is that most or all current implementations of Bech32 (such as the one in *bitcoinj*) do not yet offer the improved algorithm.
+
+
 === Omni Core RPC API Enforcement
 
 All Segwit addresses provided as parameters to Omni Core RPC API methods that operate on Omni Layer smart properties, must be Omni Layer Bech32 addresses, or the RPC will return an error code. The existing Bitcoin RPC methods will accept Bitcoin Bech32 addresses.
@@ -99,6 +106,10 @@ P2PKH addresses can be used.
 
 * https://github.com/satoshilabs/slips/blob/master/slip-0173.md[SLIP-0173
 : Registered human-readable parts for BIP-0173]
+
+* https://gist.github.com/sipa/a9845b37c1b298a7301c33a04090b2eb[Analysis of insertion in Bech32 strings]
+
+* https://github.com/sipa/bech32/issues/51[bech32 Issue #51: For certain Bech32 strings, deleting or inserting a single character produces a string that is still valid]
 
 == Reference Implementations
 
