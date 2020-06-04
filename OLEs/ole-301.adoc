@@ -1,0 +1,98 @@
+....
+  OLE: 301
+  Layer: Applications
+  Title: Hierarchy for Deterministic Omni Wallets
+  Author: Sean Gilligan <sean@msgilligan.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-301.adoc
+  Status: Draft
+  Type: Informational
+  Created: 2020-05-27
+  License: BSD-2-Clause
+....
+
+== Introduction
+
+=== Abstract
+
+This document defines _paths_ for Omni-capable Hierarchical Deterministic (HD) wallets. The definitions are based upon Bitcoin BIP-044 and Satoshi Labs SLIP-044. This document proposes that Omni tokens should/must be stored in a different HD Path than regular Bitcoin UTXOs.
+
+=== Copyright
+
+This OLE is licensed under the 2-clause BSD license.
+
+=== Motivation
+
+There are several projects currently developing Hierarchical Deterministic (HD) wallets that will be capable of receiving, storing, and sending Omni Layer tokens. A standard specifying which HD Paths should be used by Omni wallets will simplify interoperability between HD Omni-capable wallets.
+
+In addition, we propose that wallets store Omni tokens at different HD Paths than regular Bitcoins.
+
+There are several reasons why this would be helpful:
+
+. In an Omni HD wallet implementation it may be desirable to use coin control code/algorithms developed for Bitcoin-only wallets. Those algorithms may not know that an address holds Omni and spend all the UTXOs at that address leaving no Bitcoin “gas” for Omni transactions.
+. If an Omni HD wallet is backed up via BIP 39 and restored to a wallet that doesn’t know about Omni, the same problem as in reason #1 can occur.
+. It may make implementation of wallet software that uses Omni-specific addresses [OLE 300] easier if there is a dedicated “receiving” address path for Omni properties. (I don’t think there would be a need for using the “change” path at m/84'/200‘/0’/1 for Omni transactions.)
+
+=== Background
+
+BIP 44. SLIP 44. More detail TBD.
+
+== Specification
+
+
+=== HD Paths
+
+SLIP-044 already reserved Coin Type `200` for Omni, so were are using that.
+
+[cols="2,1,1,1,2",options="header",frame="all"]
+|===
+| Address Type    | Coin    | Account | Purpose   | Path
+| Legacy (Base58) | BTC     | 0       | Receiving | m/44'/0'/0'/0
+| Legacy (Base58) | BTC     | 0       | Sending   | m/44'/0'/0'/1
+| Legacy (Base58) | OMNI    | 0       | Receiving | m/44'/200'/0'/0
+| Legacy (Base58) | OMNI    | 0       | Sending   | m/44'/200'/0'/0
+| SegWit          | BTC     | 0       | Receiving | m/84'/0'/0'/0
+| SegWit          | BTC     | 0       | Sending   | m/84'/0'/0'/1
+| SegWit          | OMNI    | 0       | Receiving | m/84'/200'/0'/0
+| SegWit          | OMNI    | 0       | Sending   | m/84'/200'/0'/1
+|===
+
+NOTE:: Once we have agreement on this, we will submit a Pull Request to SLIP-0173.
+
+=== Wallet Guidelines for UTXO management, etc.
+
+These recommendations will be covered in OLE 302 (forthcoming.)
+
+== References
+
+* https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki[BIP-32: Hierarchical Deterministic Wallets]
+
+* https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki[BIP-39: Mnemonic code for generating deterministic keys]
+
+* https://github.com/bitcoin/bips/blob/master/bip-0043.mediawiki[BIP-43: Purpose Field for Deterministic Wallets]
+
+
+* https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki[BIP-44: Multi-Account Hierarchy for Deterministic Wallets]
+
+
+* https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki[BIP-49: Derivation scheme for P2WPKH-nested-in-P2SH based accounts]
+
+* https://github.com/bitcoin/bips/blob/master/bip-0084.mediawiki[BIP-84: Derivation scheme for P2WPKH based accounts]
+
+* Omni Layer Segwit Implementation [TBD]
+
+* https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki[BIP-0173
+: Base32 address format for native v0-16 witness outputs]
+
+* https://github.com/satoshilabs/slips/blob/master/slip-0173.md[SLIP-0173
+: Registered human-readable parts for BIP-0173]
+
+* https://gist.github.com/sipa/a9845b37c1b298a7301c33a04090b2eb[Analysis of insertion in Bech32 strings]
+
+* https://github.com/sipa/bech32/issues/51[bech32 Issue #51: For certain Bech32 strings, deleting or inserting a single character produces a string that is still valid]
+
+* https://github.com/OmniLayer/OmniJ/blob/master/doc/omni-utxo-management.adoc[Omni UTXO Management]
+
+== Appendices
+
+TODO: Add test vectors and/or links to Spock functional tests.
