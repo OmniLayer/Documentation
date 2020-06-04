@@ -12,7 +12,7 @@ This repository is the main repository for the Omni Layer Documentation Project.
 ** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/release-notes.md[Omni Core Release Notes]
 ** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/configuration.md#configuration[Omni Core Configuration]
 ** https://github.com/OmniLayer/omnicore/blob/develop/src/omnicore/doc/rpc-api.md#json-rpc-api[Omni Core JSON-RPC API]
-* <<OLEs/README.adoc,**O**mni **L**ayer **E**nhancement Proposals>>  (**OLE**s)
+* link:OLEs/README.adoc[**O**mni **L**ayer **E**nhancement Proposals]  (**OLE**s)
 * Omni Layer Developer Documentation
 ** <<developer/OmniDev_GettingStarted.adoc,Getting Started with Omni Development>>
 ** Omni Layer Developer's Guide (TBD)
