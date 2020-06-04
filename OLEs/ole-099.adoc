@@ -1,4 +1,5 @@
 = OLE 099
+:numbered:
 :toc: macro
 :toclevels: 3
 
@@ -46,7 +47,7 @@ then be referenced by other transactions. For instance, some tokens may
 be restricted to only be used by a set of approved addresses, such as
 addresses of people who have provided identifying documentation in
 compliance with KYC (know your customer) AML (anti-money-laundering)
-laws. See the introduction to link:#smart-property[Smart Property] above
+laws. See the introduction to _Smart Properties_ in the Specification
 for details on how to restrict a token to a set of addresses.
 
 To create or append a list of addresses, publish the following
@@ -55,23 +56,23 @@ notification from the address which will maintain the list:
 [cols=",,",options="header",]
 |===
 |*Field* |*Type* |*Example*
-|Transaction version |link:#field-transaction-version[Transaction
-version] |0
+|Transaction version |Transaction
+version |0
 
-|Transaction type |link:#field-transaction-type[Transaction type] |32
+|Transaction type |Transaction type |32
 
-|Number of addresses |link:#field-integer-one-byte[Integer one-byte] |4
+|Number of addresses |Integer one-byte |4
 
-|Address 1 |link:#field-bitcoin-address[Bitcoin Address]
+|Address 1 |Bitcoin Address
 |010966776006953D5567439E5E39F86A0D273BEE
 
-|Address 2 |link:#field-bitcoin-address[Bitcoin Address]
+|Address 2 |Bitcoin Address
 |010966776006953D5567439E5E39F86A0D273BED
 
-|Address 3 |link:#field-bitcoin-address[Bitcoin Address]
+|Address 3 |Bitcoin Address
 |010966776006953D5567439E5E39F86A0D273BEC
 
-|Address 4 |link:#field-bitcoin-address[Bitcoin Address]
+|Address 4 |Bitcoin Address
 |010966776006953D5567439E5E39F86A0D273BEB
 |===
 
@@ -79,8 +80,8 @@ That transaction effectively starts the list (or appends it), and
 provides a handle to refer to the list (the address which published this
 message). Note that this transaction could be massive if a lot of
 addresses are added, and may require large fees in bitcoins.
-Additionally, 0.00000001 MSC (smallest unit of MSC) are burned for each
-address added, so the address maintaining the list must have enough MSC
+Additionally, 0.00000001 OMNI (smallest unit of OMNI) are burned for each
+address added, so the address maintaining the list must have enough OMNI
 and BTC on hand to cover these fees.
 
 === Removing Addresses from a List
@@ -91,26 +92,26 @@ the address which maintains the list:
 [cols=",,",options="header",]
 |===
 |*Field* |*Type* |*Example*
-|Transaction version |link:#field-transaction-version[Transaction
-version] |0
+|Transaction version |Transaction
+version |0
 
-|Transaction type |link:#field-transaction-type[Transaction type] |33
+|Transaction type |Transaction type |33
 
-|Number of addresses |link:#field-integer-one-byte[Integer one-byte] |2
+|Number of addresses |Integer one-byte |2
 
-|Address 1 |link:#field-bitcoin-address[Bitcoin Address]
+|Address 1 |Bitcoin Address
 |010966776006953D5567439E5E39F86A0D273BEE
 
-|Address 2 |link:#field-bitcoin-address[Bitcoin Address]
+|Address 2 |Bitcoin Address
 |010966776006953D5567439E5E39F86A0D273BED
 |===
 
 Any referenced addresses are removed from the list. Note that as with
 the previous transaction type, this transaction could be massive if a
 lot of addresses are removed, and may require large fees in bitcoins.
-Additionally, 0.00000001 MSC (smallest unit of MSC) are burned for each
+Additionally, 0.00000001 OMNI (smallest unit of OMNI) are burned for each
 address removed, so the address maintaining the list must have enough
-MSC and BTC on hand to cover these fees.
+OMNI and BTC on hand to cover these fees.
 
 === Transactions to Limit Funds (Theft Prevention)
 
@@ -121,14 +122,14 @@ difficult, even if that wallet is online.
 ==== Marking an Address as "`Savings`"
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
-. link:#field-transaction-type[Transaction type] = 10
-. link:#field-time-period-in-seconds[Reversibility period] = 2,592,000
+. Transaction version = 0
+. Transaction type = 10
+. Reversibility period = 2,592,000
 (30 days)
 
 Marking an address as savings is PERMANENT and cannot be undone. If an
 address is marked as savings, the reversibility rules affect not only
-Mastercoins, but any Omni Protocol child currency stored at that
+OMNI, but any Omni Protocol child currency stored at that
 address.
 
 When marking an address as savings, the reference payment points to a
@@ -148,12 +149,12 @@ transaction identical to version 0 of "`simple-send`", but with the
 transaction type of 2:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
-. link:#field-transaction-type[Transaction type] = 2
-. link:#field-currency-identifier[Currency identifier] = 1 for
-Mastercoin
-. link:#field-number-of-coins[Amount to transfer] = 100,000,000
-(1.00000000 Mastercoins)
+. Transaction version = 0
+. Transaction type = 2
+. Currency identifier = 1 for
+OMNI
+. Amount to transfer = 100,000,000
+(1.00000000 OMNI)
 
 An address marked as savings can only do this "`restricted send`"
 transaction type. All other transaction types must be ignored, as they
@@ -177,14 +178,14 @@ compromised, and you want to reverse transactions and transfer
 everything to the guardian address. Doing this takes 4 bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
-. link:#field-transaction-type[Transaction type] = 11 for marking a
+. Transaction version = 0
+. Transaction type = 11 for marking a
 compromised savings address
 
 This transaction must be sent from the guardian address. The reference
 payment must be to the compromised savings address. Funds from any
 pending transactions and any remaining funds will then be transferred to
-the guardian address, both Mastercoins and any other Omni Protocol
+the guardian address, both OMNI and any other Omni Protocol
 currencies.
 
 ===== Advantages of the Savings/Guardian Model
@@ -211,17 +212,17 @@ transaction!
 
 ==== Marking an Address as Rate-Limited
 
-Say you want to enforce a spending limit of 1 Mastercoin per Month on
+Say you want to enforce a spending limit of 1 OMNI per Month on
 one of your addresses. Doing this takes 20 bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
-. link:#field-transaction-type[Transaction type] = 12
-. link:#field-currency-identifier[Currency identifier] = 1 for
-Mastercoin
-. link:#field-number-of-coins[Spending Limit] = 100,000,000 (1.00000000
-Mastercoins)
-. link:#field-time-period-in-seconds[Limitation Reset period] =
+. Transaction version = 0
+. Transaction type = 12
+. Currency identifier = 1 for
+OMNI
+. Spending Limit = 100,000,000 (1.00000000
+OMNI)
+. Limitation Reset period =
 2,592,000 (30 days)
 
 Marking an address as rate-limited only affects the specified currency.
@@ -238,7 +239,7 @@ rate-limited. Note that an address could be marked as savings AND rate
 limited, with the same or different guardian addresses.
 
 An address marked as savings can only do
-link:#restricted-send[Restricted Send] transactions as described above.
+Restricted Send transactions as described above.
 All other transaction types must be ignored, as they are invalid from a
 rate-limited address.
 
@@ -247,10 +248,10 @@ rate-limited address.
 Removing the rate limitation above takes 8 bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
-. link:#field-transaction-type[Transaction type] = 14
-. link:#field-currency-identifier[Currency identifier] = 1 for
-Mastercoin
+. Transaction version = 0
+. Transaction type = 14
+. Currency identifier = 1 for
+OMNI
 
 This transaction must be sent from the guardian address in charge of the
 rate limitation. The reference payment must be to the rate-limited
@@ -272,20 +273,20 @@ bytes due to the use of null-terminated strings. This example uses 57
 bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
-. link:#field-transaction-type[Transaction type] = 30
-. link:#field-ecosystem[Ecosystem] = 1 for useable within Mastercoin
-ecosystem (as opposed to Test Mastercoin)
-. link:#field-currency-identifier[Parent currency identifier] = 1 for
-Mastercoin (the price of Gold will be published in units of Mastercoin)
-. link:#field-string-255-byte-null-terminated[Category] =
+. Transaction version = 0
+. Transaction type = 30
+. Ecosystem = 1 for usable within Omni
+ecosystem (as opposed to Test ecosystem)
+. Parent currency identifier = 1 for
+OMNI (the price of Gold will be published in units of OMNI)
+. Category =
 "`Commodities\0`" (12 bytes)
-. link:#field-string-255-byte-null-terminated[Sub-Category] =
+. Sub-Category =
 "`Metals\0`" (7 bytes)
-. link:#field-string-255-byte-null-terminated[Label] = "`Gold\0`" (5
+. Label = "`Gold\0`" (5
 bytes) (if a second "`Gold`" is registered in this sub-category, it will
 be shown as "`Gold-2`")
-. link:#field-string-255-byte-null-terminated[Description/Notes] =
+. Description/Notes =
 "`tinyurl.com/kwejgoig\0`" (21 bytes) (Please save space in the block
 chain by linking to your description!)
 
@@ -295,10 +296,10 @@ publishing the data.
 Each data stream gets a 4-byte unique identifier, determined by the
 order in which they were registered. For instance, if your data stream
 was the third data stream ever registered, your data stream identifier
-would be 3. Note that data streams in the Test MSC ecosystem are
+would be 3. Note that data streams in the Test OMNI ecosystem are
 completely independent, and have the most significant bit set to
 distinguish them from normal data streams. However, in sandbox
-environments using only Test MSC, these IDs can be displayed without the
+environments using only Test OMNI, these IDs can be displayed without the
 MSB set, for easier reading.
 
 Since anyone can cheaply register a data stream, and thereby create
@@ -323,27 +324,27 @@ update the datastream to have an empty category, subcategory, and label
 ==== Publishing Data
 
 Say you decide you would like publish that today’s gold price is 15
-Mastercoins per ounce, using the datastream described above. Doing so
+OMNI per ounce, using the datastream described above. Doing so
 takes 13 bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
-. link:#field-transaction-type[Transaction type] = 31
-. link:#field-ecosystem[Ecosystem] = 1 for useable within Mastercoin
-ecosystem (as opposed to Test Mastercoin)
-. link:#field-number-of-coins[Data] = 1,500,000,000 (15.00000000
-Mastercoins per ounce of gold)
+. Transaction version = 0
+. Transaction type = 31
+. Ecosystem = 1 for useable within Omni
+ecosystem (as opposed to Test ecosystem)
+. Data = 1,500,000,000 (15.00000000
+OMNI per ounce of gold)
 
 ==== Offering a Bet
 
 Say you want to use USDCoins (another hypothetical Omni Protocol
 currency, each USDCoin being worth one U.S. Dollar) to bet $200 that the
-gold ticker will not rise above 20 Mastercoins/Ounce in the next 30 days
+gold ticker will not rise above 20 OMNI/Ounce in the next 30 days
 at 2:1 odds. For the sake of example, we will assume that USDCoins have
 currency identifier 5. Creating this bet takes 36 bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
+. Transaction version = 0
 . Transaction type = 40 for creating a bet offer (32-bit unsigned
 integer, 4 bytes)
 . Bet Currency identifier = 5 for USDCoin (32-bit unsigned integer, 4
@@ -355,7 +356,7 @@ example (32-bit unsigned integer, 4 bytes)
 . Bet threshold (Non-CFDs only) = 200,000 (0.00200000 BTC, which equates
 to a ticker value of 20 per our data stream example) *OR* Leverage (CFDs
 only) = 65536 (1x leverage) (32-bit unsigned integer, 4 bytes)
-. link:#field-utc-datetime[Settlement Date] = January 1st, 2215 00:00:00
+. Settlement Date = January 1st, 2215 00:00:00
 UTC (8 bytes)
 . Amount of wager = 20,000,000,000 (200.00000000 USDCoins) (64-bit
 unsigned integer, 8 bytes)
@@ -373,61 +374,59 @@ amount of wager to zero.
 
 *Table of Bet Types*
 
-0
+[cols="1,1,1,1",options="header"]
+|===
 
-Will equal on
+| 0
+| Will equal on
 
-32
+| 32
+| Will equal on or before
 
-Will equal on or before
+| 1
+| Will not equal on
 
-1
+| 33
+| Will not equal on or before
 
-Will not equal on
+|2
+|Will exceed on
 
-33
+|34
+|Will exceed on or before
 
-Will not equal on or before
+|3
+|Will not exceed on
 
-2
+|35
+|Will not exceed on or before
 
-Will exceed on
+|4
+|Will be below on
 
-34
+|36
+|Will be below on or before
 
-Will exceed on or before
+|5
+|Will not be below on
 
-3
+|37
+|Will not be below on or before
 
-Will not exceed on
+|6
+|Bullish Contract for Difference
 
-35
+|
+|
 
-Will not exceed on or before
+|7
+|Bearish Contract for Difference
 
-4
+|
+|
 
-Will be below on
+|===
 
-36
-
-Will be below on or before
-
-5
-
-Will not be below on
-
-37
-
-Will not be below on or before
-
-6
-
-Bullish Contract for Difference
-
-7
-
-Bearish Contract for Difference
 
 A "`Contract for Difference`" (CFD) allows a bettor to temporarily gain
 bullish or bearish exposure to a price movement, in direct proportion to
@@ -457,7 +456,7 @@ data will mark both bets as accepted). Here is what a bet matching our
 last example would look like:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
+. Transaction version = 0
 . Transaction type = 40 for creating a bet offer (32-bit unsigned
 integer, 4 bytes)
 . Bet Currency identifier = 5 for USDCoin (32-bit unsigned integer, 4
@@ -469,7 +468,7 @@ example (32-bit unsigned integer, 4 bytes)
 . Bet threshold (Non-CFDs only) = 200,000 (0.00200000 BTC, which equates
 to a ticker value of 20 per our data stream example) *OR* Leverage (CFDs
 only) = 65536 (1x leverage) (32-bit unsigned integer, 4 bytes)
-. link:#field-utc-datetime[Settlement Date] = January 1st, 2215 00:00:00
+. Settlement Date = January 1st, 2215 00:00:00
 UTC (8 bytes)
 . Amount of wager = 5,000,000,000 (50.00000000 USDCoins) (64-bit
 unsigned integer, 8 bytes)
@@ -484,8 +483,8 @@ first bet still has $100 available for someone else to bet $50 against.
 
 Once GoldCoins reach a value of 20 or the bet deadline passes, the bet
 winner gets 99.5% of the money at stake. The other 0.5% goes to the
-creator of the data stream. When using currencies other than Mastercoin,
-a small fee will be deducted (see link:#fees[fees] above).
+creator of the data stream. When using currencies other than OMNI,
+a small fee will be deducted (see the "Fees" section of the Specification).
 
 === Distributed E-Commerce
 
@@ -498,17 +497,17 @@ to know and follow the laws of their respective jurisdictions.
 
 ==== Listing Something for Sale
 
-Say you want to sell a Bible for 0.001 Mastercoins. Creating a sell
+Say you want to sell a Bible for 0.001 OMNI. Creating a sell
 offer will use a variable number of bytes due to the use of
 null-terminated strings:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
+. Transaction version = 0
 . [Transaction type] = 60 for sale listing (16-bit unsigned integer, 2
 bytes)
-. Currency identifier of price = 1 for Mastercoin (32-bit unsigned
+. Currency identifier of price = 1 for OMNI (32-bit unsigned
 integer, 4 bytes)
-. Desired price = 100,000 (0.00100000 Mastercoins) (64-bit unsigned
+. Desired price = 100,000 (0.00100000 OMNI) (64-bit unsigned
 integer, 8 bytes)
 . Item category = "`Contraband\0`" (11 bytes)
 . Item subcategory = "`Forbidden Books\0`" (16 bytes)
@@ -536,19 +535,19 @@ purchase process takes 20 bytes. The optional comment field adds
 additional bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0 (2 bytes)
+. Transaction version = 0 (2 bytes)
 . [Transaction type] = 61 for Initiate purchase from listing (16-bit
 unsigned integer, 2 bytes)
 . Listing ID = 0 (the ID for the listing above) (32-bit unsigned
 integer, 4 bytes)
-. link:#field-time-period-in-seconds-future[Offer Valid For] = 259200
+. Offer Valid For = 259200
 seconds - 3 days (4 bytes)
-. Offered price = 110,000 (0.00110000 Mastercoins) (64-bit unsigned
+. Offered price = 110,000 (0.00110000 OMNI) (64-bit unsigned
 integer, 8 bytes)
 . Comment = "`I really want this book!\0`" (25 bytes)
 
 The reference address points to the address which listed the Bible for
-sale with the currency identifier set to 1 (Mastercoin). The seller now
+sale with the currency identifier set to 1 (OMNI). The seller now
 has 3 days to accept this buyer’s before the offer expires. The buyer’s
 money is now locked in escrow until their offer expires or the purchase
 is complete.
@@ -571,15 +570,15 @@ reputation, then you simply do not accept that specific transaction
 The message to accept the offer takes X bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
+. Transaction version = 0
 . Transaction type = 62 for Accept buyer offer (32-bit unsigned integer,
 4 bytes)
 . Which buyer = 2 (3rd offer received) (16-bit unsigned integer, 2
 bytes)
 
 Once a buyer has been accepted, the seller may ship the Bible. When
-using currencies other than Mastercoin, a small fee will be deducted
-(see link:#fees[fees] above).
+using currencies other than OMNI, a small fee will be deducted
+(see the "Fees" section of the Specification).
 
 ==== Leaving Feedback
 
@@ -588,7 +587,7 @@ Once a buyer has been accepted, they may release funds held in escrow
 number of bytes due to the use of a null-terminated string:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
+. Transaction version = 0
 . [Transaction type] = 63 for Release Funds and Leave Feedback (16-bit
 unsigned integer, 2 bytes)
 . Listing ID = 0 (the ID for the listing above) (32-bit unsigned
@@ -623,11 +622,11 @@ destroyed.
 
 The most important and also the most controversial feature (at least the
 escrow backed part) of the Omni Protocol is the built-in support for
-users to create their own currencies out of existing Mastercoins. For
+users to create their own currencies out of existing OMNI. For
 the purposes of demonstrating how user currencies will work, we will use
 an example currency called "`GoldCoins`", which are intended to track
 the value of one ounce of gold, and which may be stored, transferred,
-bought, and sold similarly to Mastercoins.
+bought, and sold similarly to OMNI.
 
 ==== Stability Concept
 
@@ -635,7 +634,7 @@ So how do we drive the value of these GoldCoins to their target value,
 when demand for them may surge and decline? The price of GoldCoins is
 decided by the balance of supply and demand. Since we can’t control the
 demand for GoldCoins, we must control the supply. The key to
-accomplishing this is to use an escrow fund which holds Mastercoins, as
+accomplishing this is to use an escrow fund which holds OMNI, as
 shown below:
 
 image:images/ole-099/stability.png[Omni Protocol Layers]
@@ -644,10 +643,10 @@ The escrow fund operates like a battery on the power grid, charging when
 there is excess energy then discharging where there isn’t enough. When
 there are too few GoldCoins (GoldCoin price is too high), the escrow
 fund releases new GoldCoins, and the escrow-battery "`charges`" by
-holding Mastercoins in escrow. When there are too many GoldCoins
+holding OMNI in escrow. When there are too many GoldCoins
 (GoldCoin price is too low), the escrow fund purchases some of the
 excess GoldCoins, thereby "`discharging`" the escrow-battery as it
-releases the stored Mastercoins.
+releases the stored OMNI.
 
 ==== New Currency Creation
 
@@ -657,7 +656,7 @@ bytes, due to the use of a null-terminated string. This example uses 38
 bytes:
 
 [arabic]
-. link:#field-transaction-version[Transaction version] = 0
+. Transaction version = 0
 . Transaction type = 100 for creating a new child currency (32-bit
 unsigned integer, 4 bytes)
 . Data Stream identifier = 3 for the Gold ticker, per our data stream
@@ -667,11 +666,11 @@ example (32-bit unsigned integer, 4 bytes)
 . Escrow fund aggression factor = 1,000,000 for 1% (See below) (32-bit
 unsigned integer, 4 bytes)
 . Currency Name = "`GoldCoin\0`" (9 bytes)
-. Escrow Fund Initial Size = 100,000,000,000 for 1,000 Mastercoins
-(64-bit unsigned integer, 8 bytes, causes 1,000 Mastercoins to be
+. Escrow Fund Initial Size = 100,000,000,000 for 1,000 OMNI
+(64-bit unsigned integer, 8 bytes, causes 1,000 OMNI to be
 debited from the currency creator and credited to the escrow fund. This
 number should not exceed the amount owned by the creator, but if it
-does, assume they are crediting all their Mastercoins to the escrow
+does, assume they are crediting all their OMNI to the escrow
 fund)
 . Escrow Fund Minimum Size = 99,000,000 for 99% (32-bit unsigned
 integer, 4 bytes, if the escrow fund value is ever less than 99% of all
@@ -682,13 +681,13 @@ bytes, any time GoldCoins are sold or transferred, 0.1% are destroyed,
 which improves the health of the escrow fund)
 
 As with properties, currencies are awarded currency identifiers in the
-order in which they are created. Mastercoin is currency identifier 1
-(bitcoin is 0), and Test Mastercoins have currency identifier 2, so if
+order in which they are created. OMNI is currency identifier 1
+(bitcoin is 0), and Test OMNI have currency identifier 2, so if
 GoldCoin is the first Omni Protocol currency, it will get a currency
 identifier of 3.
 
 The currency held in escrow is the parent currency of the data stream.
-In this example it is Mastercoins, but it could also be any Omni
+In this example it is OMNI, but it could also be any Omni
 Protocol currency. For instance, GoldCoins could later be held in escrow
 to support a currency whose data stream uses GoldCoins as a parent
 currency.
@@ -725,7 +724,7 @@ unhealthy escrow funds can be found in the next section.
 
 ==== Unhealthy Escrow Funds
 
-What if the price of Mastercoins falls 95%, and the value of the escrow
+What if the price of OMNI falls 95%, and the value of the escrow
 fund is now only 5% of the target value of all GoldCoins? Using the
 battery analogy, this escrow fund now has less "`charge`" and is
 therefore less capable of intervening to correct prices.
@@ -748,11 +747,11 @@ still 1%.
 
 ==== Maintaining Escrow Fund Health
 
-Given a reasonably stable Mastercoin, escrow funds should generally grow
+Given a reasonably stable OMNI, escrow funds should generally grow
 healthier over time. Our GoldCoin escrow fund, when it does act, is
 buying GoldCoins when they are cheap, and selling them when they are
 expensive. Thus it will generally tend to make a profit, and the
-Mastercoins held by the escrow fund will grow. The larger the escrow
+OMNI held by the escrow fund will grow. The larger the escrow
 fund, the lower the chance of the currency failing to maintain its
 value. Additionally, the currency creator can optionally supply initial
 escrow funds if desired, and the currency can be tuned to destroy some
