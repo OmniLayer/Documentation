@@ -2,7 +2,26 @@
 
 == Introduction
 
-This directory contains Omni Layer Enhancement Proposals (OLEs) which will serve a similar function on the Omni Layer as BIPs perform for Bitcoin.
+This directory contains **O**mni **L**ayer **E**nhancement Proposals (**OLE**s) which are documents for proposing, discussing, and specifying ecosystem standards and additions to the Omni Protocol. OLEs are the Omni Layer equivalent of Bitoin BIPs.
+
+
+== OLEs
+
+
+[cols="1,1,5",options="header",frame="all"]
+|===
+| OLE     | Layer           | Title
+| OLE-001 | (Process)       | OLE Purpose and Guidelines (based on BIP-001)
+| OLE-099 | (Informational) | link:ole-099.adoc[Unimplemented Features from Original Specification]
+| OLE-100 | Consensus       | Omni Protocol Segregated Witness Support
+| OLE-101 | Consensus       | Omni Protocol Multi-send
+| OLE-1?? | Consensus       | Omni Non-fungible tokens (aka NFT, UIT)
+| OLE-2?? | Network         | Omni Layer REST API
+| OLE-300 | Wallet (RPC?)   | link:ole-300.adoc[Omni Layer Safe Segwit Address Format]
+| OLE-301 | Wallet          | link:ole-301.adoc[Hierarchy for Deterministic Omni Wallets]
+| OLE-302 | Wallet          | Automatic Address Handling for Omni Wallets
+|===
+
 
 == OLE ranges
 
@@ -10,29 +29,3 @@ This directory contains Omni Layer Enhancement Proposals (OLEs) which will serve
 100-199:: Consensus-effecting OLEs
 200-299:: Network layer OLEs (RPC API, etc.)
 300-399:: Higher layer OLEs (e.g. Wallet, overall ecosystem)
-
-== Existing and Planned OLEs
-
-
-=== Process and Informational
-
-OLE-001:: OLE Purpose and Guidelines (based on BIP-001)
-
-=== Consensus
-
-OLE-100:: Deferred Features from the Original Spec
-OLE-101:: Omni Non-fungible tokens (aka NFT, UIT)
-
-=== Network Layer
-
-* TBD
-
-=== Application Layer
-
-[options="header",frame="all"]
-|===
-| OLE     | Title
-| OLE-300 | link:ole-300.adoc[Omni Layer Safe Segwit Address Format]
-|===
-
-
