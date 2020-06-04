@@ -2,7 +2,7 @@
 
 == Introduction
 
-This directory contains **O**mni **L**ayer **E**nhancement Proposals (**OLE**s) which are documents for proposing, discussing, and specifying ecosystem standards and additions to the Omni Protocol. OLEs are the Omni Layer equivalent of Bitoin BIPs.
+This directory contains **O**mni **L**ayer **E**nhancement Proposals (**OLE**s) which are documents for proposing, discussing, and specifying ecosystem standards and additions to the Omni Protocol. OLEs are the Omni Layer equivalent of Bitcoin BIPs.
 
 
 == OLEs
