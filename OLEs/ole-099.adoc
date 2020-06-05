@@ -374,7 +374,7 @@ amount of wager to zero.
 
 *Table of Bet Types*
 
-[cols="1,1,1,1",options="header"]
+[cols="1,1,1,1"]
 |===
 
 | 0
