@@ -46,18 +46,17 @@ SLIP-044 already reserved Coin Type `200` for Omni, so were are using that.
 
 [cols="2,1,1,1,2",options="header",frame="all"]
 |===
-| Address Type    | Coin Type | Account | Purpose   | Path
-| Legacy (Base58) | Bitcoin   | 0       | Receiving | m/44'/0'/0'/0
-| Legacy (Base58) | Bitcoin   | 0       | Change    | m/44'/0'/0'/1
-| Legacy (Base58) | Omni      | 0       | Receiving | m/44'/200'/0'/0
-| Legacy (Base58) | Omni      | 0       | Change    | m/44'/200'/0'/1
-| SegWit          | Bitcoin   | 0       | Receiving | m/84'/0'/0'/0
-| SegWit          | Bitcoin   | 0       | Change    | m/84'/0'/0'/1
-| SegWit          | Omni      | 0       | Receiving | m/84'/200'/0'/0
-| SegWit          | Omni      | 0       | Change    | m/84'/200'/0'/1
+| Purpose (Address Type)| Coin Type | Account | Chain (Change)| Path
+| Legacy (Base58)       | Bitcoin   | 0       | Receiving     | m / 44' /   0' / 0' / 0
+| Legacy (Base58)       | Bitcoin   | 0       | Change        | m / 44' /   0' / 0' / 1
+| Legacy (Base58)       | Omni      | 0       | Receiving     | m / 44' / 200' / 0' / 0
+| Legacy (Base58)       | Omni      | 0       | Change        | m / 44' / 200' / 0' / 1
+| SegWit                | Bitcoin   | 0       | Receiving     | m / 84' /   0' / 0' / 0
+| SegWit                | Bitcoin   | 0       | Change        | m / 84' /   0' / 0' / 1
+| SegWit                | Omni      | 0       | Receiving     | m / 84' / 200' / 0' / 0
+| SegWit                | Omni      | 0       | Change        | m / 84' / 200' / 0' / 1
 |===
 
-NOTE:: Once we have agreement on this, we will submit a Pull Request to SLIP-0173.
 
 === Wallet Guidelines for UTXO management, etc.
 

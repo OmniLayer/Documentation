@@ -52,7 +52,7 @@ The P2WSH examples use `+key OP_CHECKSIG+` as script. Note that the Bitcoin and 
 
 === Human Readable Part
 
-The (to-be) registered Human Readable Part (prefix) of Omni Layer Bech32 addresses are defined in the following table. See BIP-0173 in <<References>> for details on Bech32.
+The SLIP-0173 registered Human Readable Part (prefix) of Omni Layer Bech32 addresses are defined in the following table. See BIP-0173 in <<References>> for details on Bech32. See SLIP-0173 in <<References>> for the list of registered Human Readable Parts.
 
 
 [options="header",frame="all"]
@@ -60,8 +60,6 @@ The (to-be) registered Human Readable Part (prefix) of Omni Layer Bech32 address
 | Coin | Mainnet | Testnet | Regtest
 | Omni | `o`     | `to`    | `ort`
 |===
-
-NOTE:: Once we have agreement on this, we will submit a Pull Request to SLIP-0173.
 
 === Enforcement by Wallet Implementations
 
@@ -94,8 +92,7 @@ It is worth noting that Omni Layer transactions send Bitcoin to reference addres
 === Compatibility
 
 Only new software will be able to use these addresses, and only for
-receivers with Omni-compatible Segwit-enabled new software. In all other cases, existing Bitcoin P2SH or
-P2PKH addresses can be used.
+receivers with Omni-compatible Segwit-enabled new software. In all other cases, existing Bitcoin P2SH or P2PKH addresses can be used.
 
 == References
 
