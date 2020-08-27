@@ -1,0 +1,32 @@
+....
+  OLE: 300
+  Layer: Consensus
+  Title: Omni Token as a DEX Access Token
+  Author: Adam Chamely <adam@omni.foundation>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-300.adoc
+  Status: Draft
+  Type: Informational
+  Created: 2020-08-27
+  License: BSD-2-Clause
+....
+
+== Introduction
+
+=== Abstract
+
+
+=== Copyright
+
+This OLE is licensed under the 2-clause BSD license.
+
+=== Motivation
+
+== YYY
+
+=== ZZZ
+
+== References
+
+== Appendices
+
