@@ -1,0 +1,32 @@
+....
+  OLE: 201
+  Layer: Network
+  Title: Omni Layer Proxy Microservice
+  Author: Sean Gilligan <sean@msgilligan.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-201.adoc
+  Status: Draft
+  Type: Informational
+  Created: 2020-11-19
+  License: BSD-2-Clause
+....
+
+== Introduction
+
+=== Abstract
+
+This document proposes a microservice-based Proxy layer for Omni Core that can help make Omni Core consensus information  available reliably and scaleably. It proposes on OmniProxy microservice that can proxy one or more Omni Core instances and can itself be load-balanced and an OmniProxy Admin microservice that will allow for programmatically starting, stopping, and backing up Omni Core instances.
+
+=== Copyright
+
+This OLE is licensed under the 2-clause BSD license.
+
+=== Motivation
+
+Since the launch of the Omni Layer, Omni has used Base58 Bitcoin addresses for sending and receiving Omni properties. Since the Omni Layer uses the Bitcoin network and Bitcoin private keys to sign transactions, this was the straightforward solution. Unfortunately, since all existing wallets that support Omni allow sending Omni properties to Bitcoin addresses, it is possible for users to send Omni tokens to Bitcoin wallets that do not support Omni transactions. When users send Omni properties to addresses in wallets that do not support Omni Layer transactions, it can be difficult or impossible to recover the transferred Omni properties.
+
+== Architecture
+
+Diagram forthcoming.
+
+
