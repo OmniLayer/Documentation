@@ -15,6 +15,7 @@ This directory contains **O**mni **L**ayer **E**nhancement Proposals (**OLE**s) 
 | OLE-099 | (Informational) | link:ole-099.adoc[Unimplemented Features from Original Specification]
 | OLE-100 | Consensus       | Omni Protocol Segregated Witness Support
 | OLE-101 | Consensus       | Omni Protocol Multi-send
+| OLE-102 | Consensus       | Omni Protocol Return to Senders
 | OLE-1?? | Consensus       | Omni Non-fungible tokens (aka NFT, UIT)
 | OLE-110 | Consensus       | link:ole-110.adoc[Omni Token as a DEX Access Token]
 | OLE-2?? | Network         | Omni Layer REST API
