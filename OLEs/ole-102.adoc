@@ -1,0 +1,60 @@
+....
+  OLE: 102
+  Layer: 'Consensus'
+  Title: Return to Senders
+  Author: Marv Schneider <marv@omni.foundation>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-102.adoc
+  Status: Draft
+  Type: Informational
+  Created: 2021-01-05
+  License: BSD-2-Clause
+....
+
+== Introduction
+Return-to-Senders (RtS) is a new Omni Layer (OL) transaction type that sends OL tokens back to the address(es) that sent them to the address(es) submitting the RtS tx.
+
+=== Abstract
+An exchange, or any address owner, can embed the RtS in OP_RETURN of a BTC Send, with no other changes to the BTC Send. The BTC Send is otherwise constructed
+and processed on the BTC blockchain as if it didn't contain the OL RtS. Omni Core (OC) detects the RtS tx and processes it solely within the OL environment.
+
+The exchange can embed the RtS in every BTC Send (sweep) from their deposit addresses - with no impact on BTC blockchain processing,
+or the exchange could choose to
+include the RtS based on optional additional logic, e.g. an account holder has requested help in getting access to OL tokens inadvertantly sent to the wrong
+deposit address.
+
+=== Copyright
+
+This OLE is licensed under the 2-clause BSD license.
+
+=== Motivation
+There’s renewed interest among some affected account holders in getting certain exchanges to return long-ago misdirected USDT that were sent to a deposit
+address not intended to receive the USDT tokens. More than 70 account holders currently have hundreds of thousands of inaccessible USDT sitting
+in their exchange account deposit addresses. There is talk among some of the account holders of
+pursuing legal and/or regulatory action against the exchanges. Several account holders have indicated a willingness to contribute hundreds of dollars to
+the effort to retrieve their misdirected tokens.
+
+At least one of these exchanges has not been willing to construct and submit ad hoc OL transactions to send the USDT to addresses that are accessible by their
+affected account holders. The RtS tx type eliminates the need for those ad hoc transactions.
+
+== Processing by Omni Core
+Omni Core processes Return-to-Senders by finding all transactions that sent OL tokens to the address(es) that have inputs to the BTC transaction
+that includes the RtS. OC credits the original senders with the OL token amounts they sent to those address(es), and OC debits those same amounts from the input
+address(es). The intended net effect is that the input address(es) will have a zero balance of OL tokens, and the OL token balance for
+the original sending addresses will be increased by the amount that was originally sent from that address to the input address(es).
+
+=== To Be Determined/To Be Decided
+1. Should RtS affect all OL tokens belonging to an address or should there be a way to include/exclude certain property ids?
+1. Would exchanges be willing to include the RtS payload in the OP_RETURN for BTC sweeps/other sends?
+1. Does RtS weaken privacy and/or anonymity to a point that anyone would not want to use it?
+1. Is it a burden for OC to process RtS in those sweeps, where virtually all the deposit addresses will have no OL tokens to return?
+(One side effect is that those BTC sweeps/sends now become OL tx’s, even though they affected no OL tokens.)
+1. Should OC apply the debit & credit if the input address has submitted other OL transactions for the affected OL proprety id
+(Is RtS a general purpose tx type or is it intended just to return misdirected tokens?)
+1. Details and error handling
+
+
+== References
+
+== Appendices
+
