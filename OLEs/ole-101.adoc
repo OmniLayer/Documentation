@@ -1,0 +1,55 @@
+ OLE: 101
+  Layer: Consensus
+  Title: SendFromManyToMany (SFMTM)
+  Author: Your Name <marv@omni.foundation>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-101.adoc
+  Status: Draft
+  Type: Informational
+  Created: 2021-04-26
+  License: BSD-2-Clause
+  
+= Introduction
+*SendFromManyToMany (SFMTM)* is a new OP transaction type that can reduce the cost and time required to send OL smart property tokens and bitcoins from multiple
+addresses to multiple addresses.footnote:[Technically, it probably should be called SendFromMultiToMulti, but that name might confuse people into thinking it's
+only for use with multi-signature addresses.] One *SFMTM* transaction is intended to replace multiple OP *Simple Send* transactions. *SFMTM* can also be used to provide the bitcoins needed to send OL tokens and bitcoins from one or more addresses to one or more addresses.
+
+= Motivation
+*SFMTM* should be of benefit to cryptocurrency exchanges and also to OL wallet users. The flexibility, reduced cost and reduced time enabled by *SFMTM* should interest
+both of those communities. OL Tokens and bitcoins can be sent from where they are rather than having to aggregate them in a "sending" address in order to send them as
+a unit.
+
+= Abstract
+Conceptually, *SFMTM* is similar to using UTXOs from multiple addresses to send bitcoins to multiple addresses. Exchanges won’t have to
+sweep OL tokens into a hot wallet from deposit addresses in order to send them out. That will reduce cost and time required for the exchanges to be able to send
+the OL tokens and/or bitcoins to withdrawal addresses.
+
+== General Transaction Structure
+*SFMTM* inputs identify the addresses that own the OL tokens that will be sent. Those UTXOs specify the source of the bitcoin amounts that will
+be sent to the recipient addresses. The order of the inputs doesn't matter. The whole available balance belonging to each input address will be moved from those addresses to one or
+more recipient addresses.
+
+*SFMTM* outputs identify the addresses that will receive the OL tokens according to the ordered list of amounts in OP_RETURN. The outputs will also specify
+the amount of
+bitcoins that will go to each address as a UTXO, as in any Bitcoin blockchain transaction. The last output address is the change address for the OL tokens. (This is open for discussion.) It receives
+whatever tokens from the input addresses that weren't specifically sent to an output address.footnote:[The change address is necessary because the available
+balance belonging to an input address may increase before the *SFMTM* is processed by OmniCore.]
+
+OP_RETURN will contain:
+
+* the "omni" identifier
+* the *SFMTM* transaction type and version
+* the OL smart property id of the tokens to be sent from the inputs to the outputs
+* the ordered list of one or more amounts of the OL tokens to be sent to each corresponding output address, starting with the first output address.
+** the list of amounts in OP_RETURN can be shorter than the list of outputs, if the transaction is also sending bitcoins but not OL tokens to one or more addresses
+
+In order to save space, all the numeric values in OP_RETURN could be formatted as variable lenghth integers.
+
+There are lots of error conditions to be checked and handled. If OmniCore detects _any_ OP-related error, no OL tokens are transfereed. The bitcoins would be transfered because the transaction is a valid bitcoin transaction. 
+
+= Copyright
+This OLE is licensed under the 2-clause BSD license.
+
+= References
+
+= Appendices
