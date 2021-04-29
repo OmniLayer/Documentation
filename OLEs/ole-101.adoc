@@ -17,7 +17,7 @@ only for use with multi-signature addresses.] One *SFMTM* transaction is intende
 = Motivation
 *SFMTM* should be of benefit to cryptocurrency exchanges and also to OL wallet users. The flexibility, reduced cost and reduced time enabled by *SFMTM* should interest
 both of those communities. OL Tokens and bitcoins can be sent from where they are rather than having to aggregate them in a "sending" address in order to send them as
-a unit.
+a unit. Wallet owners will be able to treat the addresses in their wallet as a unified source for transfers, rather than as a collection of independent addresses. For an exchange, the set of all their deposit addresses, plus any other source addresses, can be considered the exchange's (very large) wallet.
 
 = Abstract
 Conceptually, *SFMTM* is similar to using UTXOs from multiple addresses to send bitcoins to multiple addresses. Exchanges won’t have to
@@ -43,9 +43,9 @@ OP_RETURN will contain:
 * the ordered list of one or more amounts of the OL tokens to be sent to each corresponding output address, starting with the first output address.
 ** the list of amounts in OP_RETURN can be shorter than the list of outputs, if the transaction is also sending bitcoins but not OL tokens to one or more addresses
 
-In order to save space, all the numeric values in OP_RETURN could be formatted as variable lenghth integers.
+In order to save space, all the numeric values in OP_RETURN could be formatted as variable length integers.
 
-There are lots of error conditions to be checked and handled. If OmniCore detects _any_ OP-related error, no OL tokens are transfereed. The bitcoins would be transfered because the transaction is a valid bitcoin transaction. 
+There are lots of error conditions to be checked and handled. If OmniCore detects _any_ OP-related error, no OL tokens are transfereed. The bitcoins would be transfered because the transaction is a valid bitcoin transaction. And then you'd have to separately send bitcoins to any address that now has 0 bitcoins before trying the SFMTM send again. So, it behooves you to get it right the first time.
 
 = Copyright
 This OLE is licensed under the 2-clause BSD license.
