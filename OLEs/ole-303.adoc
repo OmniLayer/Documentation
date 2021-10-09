@@ -1,0 +1,37 @@
+....
+  OLE: 303
+  Layer: Applications
+  Title: The Omni Layer State Machine and Utreexo
+  Author: Paden Moss <padenmoss@gmail.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-303.adoc
+  Status: Draft
+  Type: Informational
+  Created: 2020-10-08
+  License: BSD-2-Clause
+....
+
+== Introduction
+
+A hash accumulator, inclusion proofs, and simple payment verification will improve the Omni Layer State Machine by optimizing speed and state size for new nodes.
+
+=== Abstract
+
+The omni layer data currently stored in the OP_RETURN would be accessible and modifiable on mobile by downloading merkle tree inclusion proof hashes for omni transactions into a cryptographic accumulator and simple payment verification nodes mapping these leaves to UTXOs.
+
+=== Copyright
+
+This OLE is licensed under the 2-clause BSD license.
+
+=== Motivation
+
+Omni Layer rescan and reindex times are very cumbersome for new nodes. Organizing the omni layer state machine differently will improve participation.
+
+=== Background
+
+Utreexo: A dynamic hash-based accumulator optimized for the Bitcoin UTXO set
+https://dci.mit.edu/utreexo
+https://eprint.iacr.org/2019/611.pdf
+
+== Specification
+
