@@ -15,7 +15,7 @@
 
 === Abstract
 
-This document defines _paths_ for Omni-capable Hierarchical Deterministic (HD) wallets. The definitions are based upon Bitcoin BIP-044 and Satoshi Labs SLIP-044. This document proposes that Omni tokens should/must be stored in a different HD Path than regular Bitcoin UTXOs.
+This document defines _paths_ for Omni-capable Hierarchical Deterministic (HD) wallets. The definitions are based upon Bitcoin BIP-044. This document proposes that Omni tokens should/must be stored in a different HD Path than regular Bitcoin UTXOs.
 
 === Copyright
 
@@ -35,28 +35,50 @@ There are several reasons why this would be helpful:
 
 === Background
 
-BIP 44. SLIP 44. More detail TBD.
+BIP 44. More detail TBD.
 
 == Specification
 
 
 === HD Paths
 
-SLIP-044 already reserved Coin Type `200` for Omni, so were are using that.
+Omni token transactions should be stored in the same "account" as Bitcoin transactions, but use a different "change" path. The value 200 is used for Omni receiving addresses and 201 for Omni change addresses.
+
+Note:: Previous versions of this specification proposed using the "Coin Type" path-level to indicate the Omni path. This has been changed to using different values at the "change" path-level so that the relevant Bitcoin and Omni paths exist under the same hardened key. This allows a single "xpub" or "xpriv" to represent an HD keychain that includes both Bitcoin and Omni keys/addresses and will simplify Wallet implementation, import/export and backup.
 
 [cols="2,1,1,1,2",options="header",frame="all"]
 |===
-| Purpose (Address Type)| Coin Type | Account | Chain (Change)| Path
-| Legacy (Base58)       | Bitcoin   | 0       | Receiving     | m / 44' /   0' / 0' / 0
-| Legacy (Base58)       | Bitcoin   | 0       | Change        | m / 44' /   0' / 0' / 1
-| Legacy (Base58)       | Omni      | 0       | Receiving     | m / 44' / 200' / 0' / 0
-| Legacy (Base58)       | Omni      | 0       | Change        | m / 44' / 200' / 0' / 1
-| SegWit                | Bitcoin   | 0       | Receiving     | m / 84' /   0' / 0' / 0
-| SegWit                | Bitcoin   | 0       | Change        | m / 84' /   0' / 0' / 1
-| SegWit                | Omni      | 0       | Receiving     | m / 84' / 200' / 0' / 0
-| SegWit                | Omni      | 0       | Change        | m / 84' / 200' / 0' / 1
+| Purpose (Address Type)| Coin Type | Account | "Change"       | Path
+| Legacy (Base58)       | Bitcoin   | 0       | Receiving      | m / 44' / 0' / 0' / 0
+| Legacy (Base58)       | Bitcoin   | 0       | Change         | m / 44' / 0' / 0' / 1
+| Legacy (Base58)       | Bitcoin   | 0       | Omni Receiving | m / 44' / 0' / 0' / 200
+| Legacy (Base58)       | Bitcoin   | 0       | Omni Change    | m / 44' / 0' / 0' / 201
+| SegWit                | Bitcoin   | 0       | Receiving      | m / 84' / 0' / 0' / 0
+| SegWit                | Bitcoin   | 0       | Change         | m / 84' / 0' / 0' / 1
+| SegWit                | Bitcoin   | 0       | Omni Receiving | m / 84' / 0' / 0' / 200
+| SegWit                | Bitcoin   | 0       | Omni Change    | m / 84' / 0' / 0' / 201
 |===
 
+=== Descriptors
+
+The following table shows the Bitcoin Output Descriptor format for each path. The italicized variables stand for the following:
+
+_fingerprint_:: The fingerprint of the account key
+_xpub_:: The xpub string
+_checksum_:: The Output Descriptor checksum
+
+[cols="1,2,3",options="header",frame="all"]
+|===
+| Address Type | Path explanation | Descriptor
+| Legacy | Bitcoin receiving | pass:q[pkh([_fingerprint_/44'/0'/0'\]]_xpub_/0/*)#_checksum_]
+| Legacy | Bitcoin change    | pass:q[pkh([_fingerprint_/44'/0'/0'\]]_xpub_/1/*)#_checksum_]
+| Legacy | Omni receiving    | pass:q[pkh([_fingerprint_/44'/0'/0'\]]_xpub_/200/*)#_checksum_]
+| Legacy | Omni change       | pass:q[pkh([_fingerprint_/44'/0'/0'\]]_xpub_/201/*)#_checksum_]
+| SegWit | Bitcoin receiving | pass:q[wpkh([_fingerprint_/84'/0'/0'\]]_xpub_/0/*)#_checksum_]
+| SegWit | Bitcoin change    | pass:q[wpkh([_fingerprint_/84'/0'/0'\]]_xpub_/1/*)#_checksum_]
+| SegWit | Omni receiving    | pass:q[wpkh([_fingerprint_/84'/0'/0'\]]_xpub_/200/*)#_checksum_]
+| SegWit | Omni change       | pass:q[wpkh([_fingerprint_/84'/0'/0'\]]_xpub_/201/*)#_checksum_]
+|===
 
 === Wallet Guidelines for UTXO management, etc.
 
