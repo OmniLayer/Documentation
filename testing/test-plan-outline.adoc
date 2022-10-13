@@ -1,0 +1,73 @@
+= Omni Test Process Outline
+Omni Team
+v0.0.1, October 6, 2022: Early Draft
+:numbered:
+:toc:
+:toclevels: 2
+
+== Intro
+
+Purpose blah blah
+
+This document does not address desired or planned future features or the overall pace of development for new features.
+
+== Development Process
+
+=== TODO
+
+. Keep up-to-date Bitcoin Core
+. Get Spec up-to-date
+. More up-front-documentation/specification (to drive test plan)
+. More documentation and architecture reviews
+. More code reviews
+
+
+== Release Process/CI
+
+
+=== TODO
+
+. Automated binary builds
+. Automated Docker container build
+. Release candidates
+
+== Automated Tests
+
+=== Bitcoin Core Tests
+
+=== Omni Tests
+
+. OmniJ Spock RegTests
+. OmniJ Spock Consensus Tests (not active, gone since Jenkins went offline)
+. Python NFT tests written by Adam
+. Python tests written by Peter?
+
+
+== Manual Tests
+
+=== Manual Test Plan/Guide
+
+. See Testing Guide: https://github.com/bitcoin-core/bitcoin-devwiki/wiki/24.0-Release-Candidate-Testing-Guide[Bitcoin Core v24.0 RC Testing Guide]
+
+=== TODO
+
+. Test Plan
+. Testing Guide
+
+== Integration Tests
+
+Manual and/or automated integration tests
+
+=== Major Integrations
+
+. Omni Engine
+. Omniwallet
+. Omni Explorer
+. OmniProxy
+. OmniJ-based apps
+
+
+=== TODO
+
+. Integrate OmniEngine stack with omni-docker
+
