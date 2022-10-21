@@ -1,0 +1,89 @@
+== Uniquely Identifiable Tokens – v0.2 DRAFT
+
+UIT introduces the new property type 5 to represent non-fungible tokens. With UIT each token within a collection is considered a unique entity and can be addressed explicitly.
+
+For example, a digital token could be created to represent cats. While the current protocol allows to create tokens to represent some form of cats in general, where every cat is a cat, each cat is also an individuum and distinct from another, so non-distinguishable tokens may not be sufficient. UIT allows to represent and interact with each cat on it’s own.
+
+NOTE:: This document needs to be converted to the *OLE* format.
+
+=== Transactions
+
+==== Creating UIT
+
+===== Fixed supply
+
+It should be possible to create a fixed number of UIT with the existing transaction 50 (``New Property Creation with Fixed number of Tokens''). The property type 5 is used for uniquely identifiable tokens. Tokens with an ascending unit identifier, starting with an identifier of 1, are then credited to the sender of the transaction.
+
+===== Managable supply
+
+It should also be possible to create a dynamic number of UIT with the existing transaction 54 (``New Property with Managed Number of Tokens'') by using 5 as property type.
+
+When creating new tokens with transaction 55 (``Granting Tokens for a Managed Property''), new tokens are created with an increasing unit identifier. For example, when there are 3 existing UIT with unit identifiers (1, 2, 3), then the next unit identifier of a newly created UIT is 4.
+
+==== Destroying UIT
+
+If a UIT is created as managable, then the existing transaction 56 (``Revoking Tokens for a Managed Property'') should be usable to destroy existing units and to reduce the outstanding supply.
+
+When revoking tokens, the tokens from the end of a range are destroyed first. For example, when there are 5 existing UIT with unit identifiers (23, 24, 25, 31, 33) and 3 UIT are revoked, then the last 3 UIT (33, 31, 25) are destroyed, resulting in a remaining collection of (23, 24).
+
+==== Transferring UIT
+
+==== Transferring single units
+
+A new transaction type is added to transfer a single specified token of a specified property:
+
+[cols=",,",options="header",]
+|===
+|*Field* |*Type* |*Example*
+|Transaction version |16-bit unsigned |0
+|Transaction type |16-bit unsigned |TBD
+|Property identifier |32-bit unsigned |571 (CryptoKitties)
+|Unit identifier |64-bit signed |700009 (Unit #700009)
+|===
+
+This transaction is similar to a regular simple send transaction, but instead of specifying an amount, a unit identifier is given to locate and determine a single unique token to transfer.
+
+==== Transferring a range of units
+
+A new transaction type is added to transfer a range of unique tokens of a specified property:
+
+[cols=",,",options="header",]
+|===
+|*Field* |*Type* |*Example*
+|Transaction version |16-bit unsigned |0
+|Transaction type |16-bit unsigned |TBD
+|Property identifier |32-bit unsigned |571 (CryptoKitties)
+|First unit identifier |64-bit signed |13 (Unit #13)
+|Last unit identifier |64-bit signed |18 (Unit #18)
+|===
+
+With this transaction it is possible to send multiple UIT in one transaction. For example, Alice has a collection of tokens (11, 12, 13, 14, 15, 18, 19, 20) and sends a range of tokens starting with identifier 13 and ending with identifier 18. In this case all tokens in that range are transferred, namely (13, 14, 15, 18).
+
+==== Transferring all available units
+
+The existing transaction 5 (``Send All'') is modified to support uniquely identifiable tokens. For this transaction type no special logic to determine, which tokens are transferred, is needed, because the transaction simply transfers all available tokens.
+
+=== RPCs
+
+==== Balance queries
+
+The existing balance RPCs should be compatible with UIT and show the total amount as if they were indivisible tokens.
+
+New RPCs are added:
+
+* `+omni_getuniquetokens+`: returns all UIT held by a specified address of a specified property
+* `+omni_getuniquetokenowner+`: returns the address that holds a specified token of a specified property
+
+__It would be nice to have a call to list all UIT, but in which format? Listing __every* unique token on it’s own can result in a huge list. Use ranges instead?*
+
+==== Transaction creation
+
+The existing RPCs for transaction creation should fail, if they don’t support UIT.
+
+The new RPC `+omni_sendunique+` can be used to send one single unique token to a receiver. The new RPC `+omni_createpayload_sendunique+` can be used to create the related raw payload. Likewise, `+omni_senduniquerange+` and `+omni_createpayload_senduniquerange+` are added to transfer a range of UIT.
+
+==== Transaction retrieval
+
+The existing RPC `+omni_gettransaction+` should support the new transactions.
+
+The existing RPCs such as `+omni_getproperty+` should have a new field `+uniquelyidentifiable+` to indicate, whether a property is a UIT.
