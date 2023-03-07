@@ -1,0 +1,32 @@
+....
+  OLE: 120
+  Layer: Consensus
+  Title: Omni Non-fungible Tokens
+  Author: TBD
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-120.adoc
+  Status: Draft
+  Type: Consensus
+  Created: 2023-03-06
+  License: BSD-2-Clause
+....
+
+== Introduction
+
+=== Abstract
+
+
+=== Copyright
+
+This OLE is licensed under the 2-clause BSD license.
+
+=== Motivation
+
+== YYY
+
+=== ZZZ
+
+== References
+
+== Appendices
+
