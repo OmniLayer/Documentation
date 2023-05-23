@@ -58,7 +58,7 @@ The SLIP-0173 registered Human Readable Part (prefix) of Omni Layer Bech32 addre
 [options="header",frame="all"]
 |===
 | Coin | Mainnet | Testnet | Regtest
-| Omni | `o`     | `to`    | `ort`
+| Omni | `o`     | `to`    | `ocrt`
 |===
 
 === Enforcement by Wallet Implementations
