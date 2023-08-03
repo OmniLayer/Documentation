@@ -19,6 +19,7 @@ This directory contains **O**mni **L**ayer **E**nhancement Proposals (**OLE**s) 
 | OLE-110 | Consensus       | link:ole-110.adoc[Omni Token as a DEX Access Token]
 | OLE-111 | Consensus       | Wrapped BTC Support (Reserved)
 | OLE-120 | Consensus       | link:ole-120.adoc[Omni Non-fungible Tokens (aka NFT, UIT)]
+| OLE-121 | Consensus       | link:ole-121.adoc[Omni UTXO-Based Assets]
 | OLE-2?? | Network         | Omni Layer REST API
 | OLE-300 | Wallet (RPC?)   | link:ole-300.adoc[Omni Layer Safe Segwit Address Format]
 | OLE-301 | Wallet          | link:ole-301.adoc[Hierarchy for Deterministic Omni Wallets]
