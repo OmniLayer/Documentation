@@ -1,0 +1,45 @@
+....
+  OLE: 121
+  Layer: Consensus
+  Title: Omni UTXO-Based Assets
+  Author: Sean Gilligan
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/OmniLayer/Documentation/blob/master/OLEs/ole-121.adoc
+  Status: Draft
+  Type: Consensus
+  Created: 2023-08-03
+  License: BSD-2-Clause
+....
+
+== Introduction
+
+=== Abstract
+
+This document proposes adding a mechanism for Omni Smart Properties to migrate to a UTXO-based on-chain representation. This feature would be activated per-token by the token owner with the confirmation of a newly defined transaction type. Once activated for a token, individual token holders would be able to convert from Address-based to UTXO-based by sending Address-based tokens to a defined address and receiving the converted assets as change outputs.
+
+The converted assets would be able to interoperate with other protocols that require UTXOs for operation, but will lose some Omni functionality such as participation in the existing Omni Decentralized Exchange, Send To Owners functionality, etc.
+
+=== Copyright
+
+This OLE is licensed under the 2-clause BSD license.
+
+=== Motivation
+
+TBD.
+
+== Essential Characteristics
+
+Omni UTXO-based assets (UBAs) would have the following properties.
+
+* Balance held by a particular UTXO would be determined by previous Omni Layer transaction and determined by the Omni Core consensus implementation.
+* UBAs can be sent and received by a colored-coin style protocol (to be defined in this document) that maps transaction inputs to transaction outputs.
+* UTXO-based balances will *never change* by any mechanism of the Omni Layer, they can only be spent by sending them to new UTXOs. This is necessary for proper operation with other layer 2 protocols.
+
+== Details
+
+TBD.
+
+== References
+
+TBD.
+
