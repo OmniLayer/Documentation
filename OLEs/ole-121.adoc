@@ -15,7 +15,7 @@
 
 === Abstract
 
-This document proposes adding a mechanism for Omni Smart Properties to migrate to a UTXO-based on-chain representation. This feature would be activated per-token by the token owner with the confirmation of a newly defined transaction type. Once activated for a token, individual token holders would be able to convert from Address-based to UTXO-based by sending Address-based tokens to a defined address and receiving the converted assets as change outputs.
+This document proposes adding a mechanism to allow migration of Omni assets to a UTXO-based on-chain representation. This feature would be activated per-asset ID by the asset administrator upon the confirmation of a newly-defined transaction type. Once activated for an Omni asset ID, individual asset holders would be able to convert from address-based to UTXO-based by sending address-based tokens in a defined transaction type and distributing the converted assets as transaction outputs.
 
 The converted assets would be able to interoperate with other protocols that require UTXOs for operation, but will lose some Omni functionality such as participation in the existing Omni Decentralized Exchange, Send To Owners functionality, etc.
 
@@ -25,19 +25,52 @@ This OLE is licensed under the 2-clause BSD license.
 
 === Motivation
 
-TBD.
+The motivations for migration to UTXO-based assets are the following:
+
+1. To enable interoperation with other Layer 2's such as Lightning Network.
+2. To enable atomic swaps.
+3. To enable migration to a next-generation Omni Layer implementation.
+4. To enable an improved decentralized exchange.
 
 == Essential Characteristics
 
-Omni UTXO-based assets (UBAs) would have the following properties.
+Omni UTXO-based assets (UBAs) would have the following properties. These are the characteristics necessary for operation on Lightning channels, participation in atomic swaps, and other forms of interoperability with other Layer 2 protocols.
 
-* Balance held by a particular UTXO would be determined by previous Omni Layer transaction and determined by the Omni Core consensus implementation.
-* UBAs can be sent and received by a colored-coin style protocol (to be defined in this document) that maps transaction inputs to transaction outputs.
-* UTXO-based balances will *never change* by any mechanism of the Omni Layer, they can only be spent by sending them to new UTXOs. This is necessary for proper operation with other layer 2 protocols.
+. The input amount available to a conversion transaction is determined by previous (address-based) Omni Layer transactions as implemented by the Omni Core consensus algorithm.
+. UBAs can be sent and received by a colored-coin style protocol (to be defined in this document) that maps transaction input amounts to transaction output amounts.
+. Once converted, UTXO-based balances will *never change* except through movement of UTXOs at Layer 1 (Bitcoin Layer), they can only be spent (and subdivided or merged) by specifying them as transaction inputs in a Layer 1 transaction. This is necessary for proper interoperation with other layer 2 protocols. This means that some existing Omni Layer capabilities like Send To Owners will not affect asset amounts attached to a UTXO.
+
+== Limitations
+
+This initial document draft seeks to define a minimum set of functionality. Future revisions _may_ add additional functionality.
+
+. The conversion process is one-way. There's no way to convert back to address-based format.
 
 == Details
 
-TBD.
+=== New Transaction Types
+
+At a minimum we need to define the following transactions types:
+
+. UBA-Enable: Enable UTXO-based assets for an asset. An Omni Class C transaction with Omni Layer transaction type 200. (Asset Administrator)
+. UBA-Convert: Convert a single CurrencyID address-based asset to a UTXO-based asset. An Omni Class C transaction with Omni Layer transaction type 201. (Asset Holder)
+. UBA-Send: Send UTXO-based assets in a Bitcoin transaction moving them from transaction inputs to transaction outputs. This transaction type may or may not have an OmniLayer transaction type as it is not yet determined if this transaction will have an OP_RETURN marker and if it does whether the marker will be in Omni Class C format. (202 is reserved for this transaction, pending further discussion.) (Asset Holder)
+
+
+=== Issues
+
+. Freezing
+. Define satoshi to asset scaling and/or mapping. In other words we need to define how many units of the UBA are represented by the satoshis in any given UTXO.
+. Minimizing the possibility of non-compliant wallets accidentally sending or destroying asset UTXOs.
+.. Can we define the protocol so there is no invalid UVA Omni Transaction?
+. How do reorgs affect the conversion process? Should we add a time-lock to make this safer?
+
+=== TODO
+
+* Clarify point 4 about immutability & irreversibility.
+* Details about what is an invalid UBA-transaction and what if any funds are burnt or perhaps unintentionally sent to another address.
+* Reference to documentation about UTXO-based atomicity and interoperability.
+
 
 == References
 
